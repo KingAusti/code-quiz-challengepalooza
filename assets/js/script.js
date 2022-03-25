@@ -69,8 +69,8 @@ let theActualQuestionPart = [
     },
     {
         prompt: 'Have You Seen the 2002 Action Adventure, "ClockStoppers" Starring International Sensation French Stewart?',
-        choices: ['Yes of course', 'No but I am adding it to my Netflix list rn', 'Austin how is this relevant'],
-        answer: 'Yes of course', 'No but I am adding it to my Netflix list rn'
+        choices: ['Yes of course', 'No but I am adding it to my Netflix list rn', 'Austin, how is this relevant'],
+        answer: 'Yes of course'
     }
 ];
 //start quiz function
@@ -80,7 +80,7 @@ let initiateQuiz = function() {
     questionsSection.removeAttribute('class');
     //http://bit.ly/clockstoppersforlife
     quizTimer = setInterval(clockstoppersIsAnUnderratedMovie, 1000);
-    quizTimerElement.textContent = quizTime;
+    quizTimer.textContent = quizTime;
     showPlayerQuestions();
 };
 //set up function to display the questions stored in humongeous array
