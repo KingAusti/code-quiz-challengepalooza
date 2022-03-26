@@ -17,14 +17,14 @@
         <nav class="container">
             <ul class="row" >
                 <a class="text-decoration-none text-dark" href="./leaderboard.html"><div id="scores" class="col fw-bolder">High Scores</div></a>
-                <div id="time" class="col fw-bolder">Time Remaining:&nbsp
+                <div id="timeRemaining" class="col fw-bolder">Time Remaining:&nbsp
                     <span id="timer"></span>
                 </div>
             </ul>
         </nav>
     </header>
 
-    <main class="container">
+    <main class="container" id="card">
         <section class="row" id="starter">
             <h1 class="text-center">Code Quiz Challengepalooza</h1>            
             <button
@@ -44,14 +44,16 @@
 
         <section id="feedback" class="hide feedback"></section>
 
-        <section class="hide">
-            <h2 class="text-center">Quiz Complete!</h2>
+        <section class="hide" id="highscore-input">
+            <h2 class="text-center">
+                Quiz Complete!
+            </h2>
             <h3 class="text-center">
                 Here's how you did:
                 <span id="high-score"></span>
             </h3">            
-                <h4 class="grid" style="--bs-columns: 18; --bs-gap: .5rem;">
-                    Enter Your Name:
+                <div class="grid" style="--bs-columns: 18; --bs-gap: .5rem;">
+                    Whats Your Name, Champion?
                     <input 
                     id="player-name"
                     style="grid-column: span 14;" type="text" 
@@ -62,7 +64,7 @@
                             class="g-col-4 shadow btn btn-outline-dark fw-bolder btn-sm">
                         SUBMIT
                     </button>                    
-                </h4>
+                </div>
         </section>
 
     </main>

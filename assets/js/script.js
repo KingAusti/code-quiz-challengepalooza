@@ -1,5 +1,5 @@
 //set quiz time length
-let quizTime = 240;
+let quizTime = 5;
 let quizTimer;
 //set initial question value
 let questionValue = 0;
@@ -7,12 +7,14 @@ let questionValue = 0;
 let questionsSection = document.querySelector('#questions-section');
 let questions = document.querySelector('#questions');
 let answers = document.querySelector('#answers');
+let timeRemaining = document.querySelector('#timeRemaining');
 let timer = document.querySelector('#timer');
 let scores = document.querySelector('#scores');
 let start = document.querySelector('#startButton');
 let submit = document.querySelector('#submitButton');
 let feedback = document.querySelector('#feedback');
 let highScore = document.querySelector('#high-Score')
+let championScore = document.querySelector('#highscore-input')
 let playerName = document.querySelector('#player-name')
 
 //build array using 10 terrible and 1 very serious question
@@ -80,7 +82,7 @@ let initiateQuiz = function() {
     questionsSection.removeAttribute('class');
     //http://bit.ly/clockstoppersforlife
     quizTimer = setInterval(clockstoppersIsAnUnderratedMovie, 1000);
-    quizTimer.textContent = quizTime;
+    timer.textContent = quizTime;
     showPlayerQuestions();
 };
 //set up function to display the questions stored in humongeous array
@@ -103,7 +105,7 @@ let clickActions = function() {
         timer.textContent = quizTime;
         feedback.textContent = 'Wanna Try that Again There Bud?';
     } else {
-        feedback.textContent = 'Nailed It!';
+        feedback.textContent = 'Oh You Betcha!';
     };
     feedback.setAttribute('class', 'feedback');
     lapseTime(function() {
@@ -111,7 +113,7 @@ let clickActions = function() {
     }, 1000);
     questionValue++;
     lapseTime( function(){
-        if (questionValue === questionsSection.length) {
+        if (questionValue === theActualQuestionPart.length) {
             quizConclusion();
         } else {
             showPlayerQuestions();
@@ -131,8 +133,8 @@ let clockstoppersIsAnUnderratedMovie = function() {
 let quizConclusion = function() {
     clearInterval(quizTimer);
     questionsSection.setAttribute('class', 'hide');
-    feedback.removeAttribute('class');
-    highScore.textContent = quizTime;
+    championScore.removeAttribute('class');
+    highScore.textContent = quizTime;    
 };
 //create function for saving score after quiz completes
 let initiateSave = function() {
@@ -150,7 +152,7 @@ let initiateSave = function() {
         window.localStorage.setItem('playerScore', JSON.stringify(playerScore));
         window.location.href = 'leaderboard.html';
         window.location.reload();
-    };
+    }
     //if youre reading this, reply with 'DRINK MORE OVALTINE' when you grade my code
 };
 //listeners for submit and start buttons
