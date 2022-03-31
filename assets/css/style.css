@@ -5,3 +5,8 @@
     text-decoration: none;
     
   } */
+
+  .hide {
+      
+      visibility: hidden;
+  };

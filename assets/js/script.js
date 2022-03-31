@@ -1,24 +1,25 @@
 //set quiz time length
-let quizTime = 5;
+let quizTime = 25;
 let quizTimer;
 //set initial question value
 let questionValue = 0;
 //pull all id's from index so we can start working on this quiz
-let questionsSection = document.querySelector('#questions-section');
-let questions = document.querySelector('#questions');
-let answers = document.querySelector('#answers');
-let timeRemaining = document.querySelector('#timeRemaining');
-let timer = document.querySelector('#timer');
-let scores = document.querySelector('#scores');
-let start = document.querySelector('#startButton');
-let submit = document.querySelector('#submitButton');
-let feedback = document.querySelector('#feedback');
-let highScore = document.querySelector('#high-Score')
-let championScore = document.querySelector('#highscore-input')
-let playerName = document.querySelector('#player-name')
+let questionsSection = document.getElementById('questions-section');
+let questions = document.getElementById('questions');
+let answers = document.getElementById('answers');
+let timeRemaining = document.getElementById('timeRemaining');
+let timer = document.getElementById('timer');
+let scores = document.getElementById('scores');
+let start = document.getElementById('startButton');
+let submit = document.getElementById('submitButton');
+let feedback = document.getElementById('feedback');
+let highScore = document.getElementById('high-score')
+let championScore = document.getElementById('highscore-input')
+let playerName = document.getElementById('player-name')
+let starter = document.getElementById('starter');
 
 //build array using 10 terrible and 1 very serious question
-let theActualQuestionPart = [
+const theActualQuestionPart = [
     {
         prompt: 'What is the format called that is used for storing and transporting data?',
         choices: ['JSON', 'HTML', 'Syntax', 'Font'],
@@ -76,9 +77,8 @@ let theActualQuestionPart = [
     }
 ];
 //start quiz function
-let initiateQuiz = function() {
-    let starterQuizInfo = document.querySelector('#starter');
-    starterQuizInfo.setAttribute('class', 'hide');
+const initiateQuiz = function() {    
+    starter.setAttribute('class', 'hide');
     questionsSection.removeAttribute('class');
     //http://bit.ly/clockstoppersforlife
     quizTimer = setInterval(clockstoppersIsAnUnderratedMovie, 1000);
@@ -86,7 +86,7 @@ let initiateQuiz = function() {
     showPlayerQuestions();
 };
 //set up function to display the questions stored in humongeous array
-let showPlayerQuestions = function() {
+const showPlayerQuestions = function() {
     let questionArr = theActualQuestionPart[questionValue];
     questions.textContent = questionArr.prompt;
     answers.innerHTML = "";
@@ -94,12 +94,13 @@ let showPlayerQuestions = function() {
         let answerButton = document.createElement('button');
         answerButton.setAttribute('class', 'choice btn btn-outline-primary');
         answerButton.textContent = i + 1 + ". " + choices;
-        answerButton.onClick = clickActions;
+        answerButton.onclick = clickActions;
         answers.appendChild(answerButton);
     });
 }
 //set up function to handle user interaction
-let clickActions = function() {
+const clickActions = function() {
+    
     if (this.value !== theActualQuestionPart[questionValue].answer) {
         quizTime -= 15;
         timer.textContent = quizTime;
@@ -108,20 +109,21 @@ let clickActions = function() {
         feedback.textContent = 'Oh You Betcha!';
     };
     feedback.setAttribute('class', 'feedback');
-    lapseTime(function() {
+    setTimeout(function() {
         feedback.setAttribute('class', 'feedback hide');
     }, 1000);
     questionValue++;
-    lapseTime( function(){
+    setTimeout(function(){
         if (questionValue === theActualQuestionPart.length) {
             quizConclusion();
         } else {
             showPlayerQuestions();
         };
     }, 1000);
+
 };
 //take a stand to declare a childhood favorite and while youre at it build a countdown timer.
-let clockstoppersIsAnUnderratedMovie = function() {
+const clockstoppersIsAnUnderratedMovie = function() {
     quizTime--;
     timer.textContent = quizTime;
     //when time hits 0 run function that stops quiz and hides elements
@@ -130,26 +132,28 @@ let clockstoppersIsAnUnderratedMovie = function() {
     }
 };
 //create function to run after the quiz countdown completes
-let quizConclusion = function() {
+const quizConclusion = function() {
     clearInterval(quizTimer);
     questionsSection.setAttribute('class', 'hide');
     championScore.removeAttribute('class');
     highScore.textContent = quizTime;    
 };
 //create function for saving score after quiz completes
-let initiateSave = function() {
+const initiateSave = function() {
     //setting name pulled from user input and giving them flattering name because im a nice guy
     let champion = playerName.value.toUpperCase().trim();
+    console.log(champion)
     //save user score to localStorage and display in outside userboard
     if (champion !== "") {
         //FUN FACT: setting up localStorage gives me acid reflux :D
-        let highScores = JSON.parse(window.localStorage.getItem('highscores')) || [];
+        let highScores = JSON.parse(window.localStorage.getItem('highscores')) || []
         playerScore = {
             score: quizTime,
-            intials: playerName
+            initials: champion
         };
         highScores.push(playerScore);
-        window.localStorage.setItem('playerScore', JSON.stringify(playerScore));
+        console.log(highScores);
+        window.localStorage.setItem('highScores', JSON.stringify(highScores));
         window.location.href = 'leaderboard.html';
         window.location.reload();
     }

@@ -1,15 +1,15 @@
-let clear = document.getElementById('clear');
+let clear = document.getElementById('WIPE-HISTORY');
 
 legendScores = function() {
     let scores = JSON.parse(window.localStorage.getItem('highScores')) || [];
     scores.sort(function(a, b) {
         return b.score - a.score;
     });
-    scores.forEach(function(score){
-        let li = document.createElement('list');
-        li.textItem.textContent = score.champion + ": " + score;
-        let list = document.querySelector('#leader-board');
-        list.appendChild(li);
+    scores.forEach(function(player){
+        let list = document.createElement('li');
+        list.textContent = player.initials + ": " + player.score;
+        let leaderList = document.getElementById('leader-board');
+        leaderList.appendChild(list);
     });
 };
 clearLegends = function() {
