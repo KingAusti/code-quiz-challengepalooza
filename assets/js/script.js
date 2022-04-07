@@ -1,5 +1,5 @@
 //set quiz time length
-let quizTime = 25;
+let quizTime = 240;
 let quizTimer;
 //set initial question value
 let questionValue = 0;
@@ -18,62 +18,57 @@ let championScore = document.getElementById('highscore-input')
 let playerName = document.getElementById('player-name')
 let starter = document.getElementById('starter');
 
-//build array using 10 terrible and 1 very serious question
+//build array using 9 terrible and 1 very serious question
 const theActualQuestionPart = [
     {
-        prompt: 'What is the format called that is used for storing and transporting data?',
-        choices: ['JSON', 'HTML', 'Syntax', 'Font'],
-        answer: 'JSON'
+        prompt: "What is the format called that is used for storing and transporting data?",
+        choices: ["JSON", "HTML", "Syntax", "Font"],
+        answer: "JSON"
     },
     {
-        prompt: 'In JavaScript, what element is used to store multiple values in a single variable?',
-        choices: ['Variables', 'Arrays', 'Strings', 'Functions'],
-        answer: 'Arrays'
+        prompt: "In JavaScript, what element is used to store multiple values in a single variable?",
+        choices: ['"Variables"', '"Arrays"', '"Strings"', '"Functions"'],
+        answer: '"Arrays"'
     },
     {
-        prompt: 'What elements are used to test for TRUE or False values stored in variables?',
-        choices: ['Trigger Readers', 'Regular Expressions', 'Conditional Statements', 'Comparison and Logical Operators'],
-        answer: 'Comparison and Logical Operators'
+        prompt: "What elements are used to test for TRUE or False values stored in variables?",
+        choices: ["Trigger Readers", "Regular Expressions", "Conditional Statements", "Comparison and Logical Operators"],
+        answer: "Comparison and Logical Operators"
     },
     {
-        prompt: 'What is the element called that can continue to execute a block of code as long as the specified condition remains TRUE?',
-        choices: ['Clone', 'Debugger', 'Repeater', 'Loop'],
-        answer: 'Loop'
+        prompt: "What is the element called that can continue to execute a block of code as long as the specified condition remains TRUE?",
+        choices: ["Clone", "Debugger", "Repeater", "Loop"],
+        answer: "Loop"
     },
     {
-        prompt: 'What is the name of the statement that is used to exit or end a loop?',
-        choices: ['Break Statement', 'Conditional Statement', 'Close Statement', 'Falter Statement'],
-        answer: 'Break Statement'
+        prompt: "What is the name of the statement that is used to exit or end a loop?",
+        choices: ["Break Statement", "Conditional Statement", "Close Statement", "Falter Statement"],
+        answer: "Break Statement"
     },
     {
-        prompt: 'This is what you call the guide that defines coding conventions for all projects.',
-        choices: ['Coding Dictionary', 'Main Textbook', 'Developer"s Reference', 'Style Guide'],
-        answer: 'Style Guide'
+        prompt: "This is what you call the guide that defines coding conventions for all projects.",
+        choices: ["Coding Dictionary", "Main Textbook", "Developer's Reference", "Style Guide"],
+        answer: "Style Guide"
     },
     {
-        prompt: 'What are the identifiers called that cannot be used as variables or function names?',
-        choices: ['Favorites', 'Constants', 'Concrete Terms', 'Reserved Words',],
-        answer: 'Reserved Words'
+        prompt: "What are the identifiers called that cannot be used as variables or function names?",
+        choices: ["Favorites", "Constants", "Concrete Terms", "Reserved Words"],
+        answer: "Reserved Words"
+    },    
+    {
+        prompt: "In JavaScript, what is a block of code called that is used to perform a specific task?",
+        choices: ["Function", "String", "Declaration", "Variable"],
+        answer: "Function"
     },
     {
-        prompt: 'What kind of statement is used to execute actions based on a trigger or condition?',
-        choices: ['Conditional Statement', 'Regular Expression', 'Fired Event', 'Boolean Value'],
-        answer: ''
+        prompt: "What is considered to be the most popular programming language in the world?",
+        choices: ["JavaScript", "Swift", "Ruby", "HTML"],
+        answer: "JavaScript"
     },
     {
-        prompt: 'In JavaScript, what is a block of code called that is used to perform a specific task?',
-        choices: ['Function', 'String', 'Declaration', 'Variable'],
-        answer: 'Function'
-    },
-    {
-        prompt: 'What is considered to be the most popular programming language in the world?',
-        choices: ['JavaScript', 'Swift', 'Ruby', 'HTML'],
-        answer: 'JavaScript'
-    },
-    {
-        prompt: 'Have You Seen the 2002 Action Adventure, "ClockStoppers" Starring International Sensation French Stewart?',
-        choices: ['Yes of course', 'No but I am adding it to my Netflix list rn', 'Austin, how is this relevant'],
-        answer: 'Yes of course'
+        prompt: "Have You Seen the 2002 Action Adventure, 'ClockStoppers' Starring International Sensation French Stewart?",
+        choices: ["Yes of course", "No but I am adding it to my Netflix list rn", "Austin, how is this relevant"],
+        answer: "Yes of course"
     }
 ];
 //start quiz function
@@ -102,7 +97,7 @@ const showPlayerQuestions = function() {
 const clickActions = function() {
     
     if (this.value !== theActualQuestionPart[questionValue].answer) {
-        quizTime -= 15;
+        quizTime -= 10;
         timer.textContent = quizTime;
         feedback.textContent = 'Wanna Try that Again There Bud?';
     } else {
