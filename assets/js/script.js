@@ -96,7 +96,7 @@ const showPlayerQuestions = function() {
 //set up function to handle user interaction
 const clickActions = function() {
     
-    if (this.value !== theActualQuestionPart[questionValue].answer) {
+    if (this.textContent !== theActualQuestionPart[questionValue].answer) {
         quizTime -= 10;
         timer.textContent = quizTime;
         feedback.textContent = 'Wanna Try that Again There Bud?';
