@@ -27,7 +27,7 @@ const theActualQuestionPart = [
     },
     {
         prompt: "In JavaScript, what element is used to store multiple values in a single variable?",
-        choices: ['"Variables"', '"Arrays"', '"Strings"', '"Functions"'],
+        choices: ["Variables", "Arrays", "Strings", "Functions"],
         answer: '"Arrays"'
     },
     {
@@ -88,6 +88,7 @@ const showPlayerQuestions = function() {
     questionArr.choices.forEach(function(choices, i){
         let answerButton = document.createElement('button');
         answerButton.setAttribute('class', 'choice btn btn-outline-primary');
+        answerButton.setAttribute("value", choices);
         answerButton.textContent = i + 1 + ". " + choices;
         answerButton.onclick = clickActions;
         answers.appendChild(answerButton);
@@ -96,7 +97,7 @@ const showPlayerQuestions = function() {
 //set up function to handle user interaction
 const clickActions = function() {
     
-    if (this.textContent !== theActualQuestionPart[questionValue].answer) {
+    if (this.value !== theActualQuestionPart[questionValue].answer) {
         quizTime -= 10;
         timer.textContent = quizTime;
         feedback.textContent = 'Wanna Try that Again There Bud?';
@@ -108,7 +109,7 @@ const clickActions = function() {
         feedback.setAttribute('class', 'feedback hide');
     }, 1000);
     questionValue++;
-    setTimeout(function(){
+    setTimeout(function() {
         if (questionValue === theActualQuestionPart.length) {
             quizConclusion();
         } else {
@@ -140,6 +141,7 @@ const initiateSave = function() {
     console.log(champion)
     //save user score to localStorage and display in outside userboard
     if (champion !== "") {
+
         //FUN FACT: setting up localStorage gives me acid reflux :D
         let highScores = JSON.parse(window.localStorage.getItem('highscores')) || []
         playerScore = {
@@ -151,6 +153,7 @@ const initiateSave = function() {
         window.localStorage.setItem('highScores', JSON.stringify(highScores));
         window.location.href = 'leaderboard.html';
         window.location.reload();
+        
     }
     //if youre reading this, reply with 'DRINK MORE OVALTINE' when you grade my code
 };
